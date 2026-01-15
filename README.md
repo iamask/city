@@ -135,7 +135,7 @@ This guide is written for **first-year engineering students** who want to unders
 
 ```mermaid
 flowchart TB
-    subgraph Browser["🌐 Browser"]
+    subgraph Browser["Browser"]
         UH[user.html]
         AH[admin.html]
         UJ[user.js]
@@ -143,23 +143,23 @@ flowchart TB
         CSS[styles.css]
     end
 
-    subgraph Worker["☁️ Cloudflare Worker"]
-        Router[Hono Router<br/>src/index.ts]
-        Upload[/api/upload<br/>routes/upload.ts]
-        Image[/api/image/:id<br/>routes/image.ts]
-        Admin[/api/admin/*<br/>routes/admin.ts]
-        Analytics[/api/analytics/*<br/>routes/analytics.ts]
+    subgraph Worker["Cloudflare Worker"]
+        Router["Hono Router<br/>src/index.ts"]
+        Upload["/api/upload<br/>routes/upload.ts"]
+        Image["/api/image/:id<br/>routes/image.ts"]
+        Admin["/api/admin/*<br/>routes/admin.ts"]
+        Analytics["/api/analytics/*<br/>routes/analytics.ts"]
     end
 
-    subgraph Storage["💾 Cloudflare Services"]
-        D1[(D1 Database<br/>SQLite)]
-        AI[Workers AI<br/>ResNet-50 / UForm]
+    subgraph Storage["Cloudflare Services"]
+        D1[("D1 Database<br/>SQLite")]
+        AI["Workers AI<br/>ResNet-50 / UForm"]
     end
 
     UH --> UJ
     AH --> AJ
-    UJ -->|POST /api/upload| Router
-    AJ -->|GET /api/admin/*| Router
+    UJ -->|"POST /api/upload"| Router
+    AJ -->|"GET /api/admin/*"| Router
     Router --> Upload
     Router --> Image
     Router --> Admin
