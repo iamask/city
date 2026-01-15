@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>EcoCity Connect - Report an Issue</title>
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>EcoCity Connect</h1>
+      <p class="subtitle">Smart Urban Resource Optimization</p>
+      <nav>
+        <a href="/user" class="active">Report Issue</a>
+        <a href="/admin">Admin Dashboard</a>
+      </nav>
+    </header>
+
+    <main>
+      <section class="upload-section">
+        <h2>Report an Issue</h2>
+        <p class="description">Help improve your city by reporting waste, water, power, or infrastructure issues.</p>
+
+        <form id="reportForm" class="report-form">
+          <div class="form-group">
+            <label for="text">Description *</label>
+            <textarea id="text" name="text" required placeholder="Describe what you observed (e.g., 'Overflowing trash bin near the bus stop')"></textarea>
+          </div>
+
+          <div class="form-group">
+            <label for="place_text">Location *</label>
+            <input type="text" id="place_text" name="place_text" required placeholder="e.g., MG Road, near Metro Station Gate 2">
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="place_area">Ward/Zone (optional)</label>
+              <input type="text" id="place_area" name="place_area" placeholder="e.g., Ward 12">
+            </div>
+            <div class="form-group">
+              <label for="observed_at">When observed *</label>
+              <input type="datetime-local" id="observed_at" name="observed_at" required>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label>GPS Location (optional)</label>
+            <div class="gps-row">
+              <input type="text" id="lat" name="lat" placeholder="Latitude" readonly>
+              <input type="text" id="lng" name="lng" placeholder="Longitude" readonly>
+              <button type="button" id="getLocationBtn" class="btn btn-secondary">Get Location</button>
+            </div>
+            <p class="help-text" id="locationStatus"></p>
+          </div>
+
+          <div class="form-group">
+            <label for="file">Photo (optional but recommended)</label>
+            <div class="drop-zone" id="dropZone">
+              <input type="file" id="file" name="file" accept="image/jpeg,image/png,image/gif,image/webp,image/heic">
+              <div class="drop-zone-content">
+                <svg class="upload-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+                  <polyline points="17 8 12 3 7 8"/>
+                  <line x1="12" y1="3" x2="12" y2="15"/>
+                </svg>
+                <p>Drag & drop an image or <span class="browse-link">browse</span></p>
+                <p class="help-text">JPEG, PNG, GIF, WebP, HEIC (max 10MB)</p>
+              </div>
+              <div class="preview-container" id="previewContainer" style="display: none;">
+                <img id="imagePreview" alt="Preview">
+                <button type="button" id="removeImage" class="btn-remove">&times;</button>
+              </div>
+            </div>
+          </div>
+
+          <button type="submit" class="btn btn-primary" id="submitBtn">
+            <span class="btn-text">Submit Report</span>
+            <span class="btn-loading" style="display: none;">Submitting...</span>
+          </button>
+        </form>
+      </section>
+
+      <section class="result-section" id="resultSection" style="display: none;">
+        <h2>Report Submitted!</h2>
+        <div class="result-card">
+          <div class="result-header">
+            <span class="badge" id="resultDomain"></span>
+            <span class="badge" id="resultSeverity"></span>
+          </div>
+          
+          <div class="result-body">
+            <h3>AI Analysis</h3>
+            <p id="resultCaption"></p>
+            
+            <div id="resultIssues"></div>
+            
+            <div class="recommendations" id="resultRecommendations"></div>
+          </div>
+
+          <div class="result-footer">
+            <p>Share this report:</p>
+            <div class="share-row">
+              <input type="text" id="shareUrl" readonly>
+              <button type="button" id="copyBtn" class="btn btn-secondary">Copy</button>
+            </div>
+          </div>
+        </div>
+
+        <button type="button" id="newReportBtn" class="btn btn-primary">Submit Another Report</button>
+      </section>
+    </main>
+
+    <footer>
+      <p>EcoCity Connect - Supporting SDG 11: Sustainable Cities and Communities</p>
+    </footer>
+  </div>
+
+  <script src="/user.js"></script>
+</body>
+</html>

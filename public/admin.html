@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>EcoCity Connect - Admin Dashboard</title>
+  <link rel="stylesheet" href="/styles.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+  <div class="container admin-container">
+    <header>
+      <h1>EcoCity Connect</h1>
+      <p class="subtitle">Authority Dashboard</p>
+      <nav>
+        <a href="/user">Report Issue</a>
+        <a href="/admin" class="active">Admin Dashboard</a>
+      </nav>
+    </header>
+
+    <main class="dashboard">
+      <!-- KPI Cards -->
+      <section class="kpi-section">
+        <div class="kpi-card">
+          <h3>Total Reports</h3>
+          <p class="kpi-value" id="totalReports">-</p>
+        </div>
+        <div class="kpi-card">
+          <h3>Today</h3>
+          <p class="kpi-value" id="todayReports">-</p>
+        </div>
+        <div class="kpi-card">
+          <h3>Flagged</h3>
+          <p class="kpi-value" id="flaggedReports">-</p>
+        </div>
+        <div class="kpi-card">
+          <h3>Top Domain</h3>
+          <p class="kpi-value" id="topDomain">-</p>
+        </div>
+      </section>
+
+      <!-- Filters -->
+      <section class="filters-section">
+        <div class="filter-group">
+          <label for="windowFilter">Time Window:</label>
+          <select id="windowFilter">
+            <option value="24h">Last 24 Hours</option>
+            <option value="7d" selected>Last 7 Days</option>
+            <option value="30d">Last 30 Days</option>
+          </select>
+        </div>
+        <div class="filter-group">
+          <label for="domainFilter">Domain:</label>
+          <select id="domainFilter">
+            <option value="">All Domains</option>
+            <option value="waste">Waste</option>
+            <option value="water">Water</option>
+            <option value="power">Power</option>
+            <option value="roads">Roads</option>
+            <option value="traffic">Traffic</option>
+          </select>
+        </div>
+        <button id="refreshBtn" class="btn btn-secondary">Refresh</button>
+      </section>
+
+      <!-- Charts Row -->
+      <section class="charts-section">
+        <div class="chart-card">
+          <h3>Reports by Domain</h3>
+          <canvas id="chartDomain" height="200"></canvas>
+        </div>
+        <div class="chart-card">
+          <h3>Reports Over Time</h3>
+          <canvas id="chartReportsOverTime" height="200"></canvas>
+        </div>
+      </section>
+
+      <section class="charts-section">
+        <div class="chart-card">
+          <h3>Domain Distribution Over Time</h3>
+          <canvas id="chartDomainStack" height="200"></canvas>
+        </div>
+        <div class="chart-card">
+          <h3>Severity Trend</h3>
+          <canvas id="chartSeverity" height="200"></canvas>
+        </div>
+      </section>
+
+      <section class="charts-section">
+        <div class="chart-card chart-card-small">
+          <h3>Visibility Status</h3>
+          <canvas id="chartVisibility" height="180"></canvas>
+        </div>
+        <div class="chart-card">
+          <h3>Hotspot Areas</h3>
+          <canvas id="chartHotspotAreas" height="200"></canvas>
+        </div>
+      </section>
+
+      <!-- Recommendations -->
+      <section class="recommendations-section">
+        <h2>Recommended Actions</h2>
+        <div id="recommendationsList" class="recommendations-list">
+          <p class="loading">Loading recommendations...</p>
+        </div>
+      </section>
+
+      <!-- Hotspots Table -->
+      <section class="hotspots-section">
+        <h2>Hotspots</h2>
+        <table class="data-table" id="hotspotsTable">
+          <thead>
+            <tr>
+              <th>Domain</th>
+              <th>Issue Type</th>
+              <th>Area</th>
+              <th>Count</th>
+              <th>Avg Severity</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody id="hotspotsBody">
+            <tr><td colspan="6" class="loading">Loading hotspots...</td></tr>
+          </tbody>
+        </table>
+      </section>
+
+      <!-- Recent Reports -->
+      <section class="reports-section">
+        <h2>Recent Reports</h2>
+        <div class="reports-filters">
+          <select id="statusFilter">
+            <option value="">All Status</option>
+            <option value="new">New</option>
+            <option value="in_review">In Review</option>
+            <option value="actioned">Actioned</option>
+          </select>
+          <select id="visibilityFilter">
+            <option value="">All Visibility</option>
+            <option value="public">Public</option>
+            <option value="blocked">Blocked</option>
+          </select>
+        </div>
+        <table class="data-table" id="reportsTable">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Description</th>
+              <th>Location</th>
+              <th>Domain</th>
+              <th>Severity</th>
+              <th>Status</th>
+              <th>Created</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody id="reportsBody">
+            <tr><td colspan="8" class="loading">Loading reports...</td></tr>
+          </tbody>
+        </table>
+        <div class="pagination" id="pagination"></div>
+      </section>
+
+      <!-- Report Detail Modal -->
+      <div class="modal" id="reportModal" style="display: none;">
+        <div class="modal-content">
+          <button class="modal-close" id="modalClose">&times;</button>
+          <div id="modalBody"></div>
+        </div>
+      </div>
+    </main>
+
+    <footer>
+      <p>EcoCity Connect - Supporting SDG 11: Sustainable Cities and Communities</p>
+    </footer>
+  </div>
+
+  <script src="/admin.js"></script>
+</body>
+</html>
